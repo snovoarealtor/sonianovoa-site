@@ -1,3 +1,6 @@
+/* Load order + speed wrapper (11/7/26): moves site.css after Agent 3000's own styles, and makes the page watchers run at most once per 150 ms instead of on every change. */
+(function(){function snMoveCss(){var l=document.querySelector('link[href*="sonianovoa-site"][href$="site.css"]');if(l&&document.body&&document.body.lastElementChild!==l){document.body.appendChild(l);}}snMoveCss();window.addEventListener('load',function(){snMoveCss();setTimeout(snMoveCss,1500);});})();
+(function(MutationObserver){
 /* Sonia Novoa - sonianovoa.com site behaviors. Loaded on every page via jsDelivr. */
 /* ---- part 1 ---- */
 try{
@@ -63,3 +66,5 @@ try{
 "/blog":["South Florida Real Estate Blog | Sonia Novoa, United Realty Group","Market updates, neighborhood guides and buying and selling tips for Broward, Miami-Dade and Palm Beach from Sonia Novoa, Realtor."]};b=b.toLowerCase().replace(/\/+$/,"");if(d[b]){var e=d[b];b=function(){document.title!==e[0]&&(document.title=e[0]);var a=document.querySelector('meta[name\x3d"description"]');a||(a=document.createElement("meta"),a.name="description",document.head.appendChild(a));a.getAttribute("content")!==
 e[1]&&a.setAttribute("content",e[1])};b();document.addEventListener("DOMContentLoaded",b);setTimeout(b,1500)}b=function(){for(var a=document.querySelectorAll('a[href\x3d"/content/blog"],a[href$\x3d"/content/blog"]'),c=0;c<a.length;c++){var g=a[c].closest("li")||a[c];g.style.display="none"}};b();document.addEventListener("DOMContentLoaded",b);setTimeout(b,1500)})();
 }catch(e){if(window.console)console.warn("sn part 6",e);}
+
+})(function(cb){var N=window.MutationObserver,t=0;return new N(function(){if(t)return;t=setTimeout(function(){t=0;try{cb([])}catch(e){}},150);});});
