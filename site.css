@@ -301,3 +301,6 @@ html.sn-ld .property-details h2{font-size:24px!important;}
 /* Solid buttons hover (11/7/26) */
 .sn-solid:hover{background:#333333!important;color:#FFFFFF!important}
 .sn-solid-light:hover{background:#E6E6E6!important;color:#4A4A4A!important}
+
+/* Agent 3000 template headings and menu use #1F1F1F; match the site charcoal (11/7/26) */
+h1,h2,h3,h4,h5,h6,.ada-h4,li.no-submenu,li.has-submenu{color:#4A4A4A}
