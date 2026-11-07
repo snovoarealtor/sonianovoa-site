@@ -68,3 +68,6 @@ e[1]&&a.setAttribute("content",e[1])};b();document.addEventListener("DOMContentL
 }catch(e){if(window.console)console.warn("sn part 6",e);}
 
 })(function(cb){var N=window.MutationObserver,t=0;return new N(function(){if(t)return;t=setTimeout(function(){t=0;try{cb([])}catch(e){}},150);});});
+
+/* City page maps (11/7/26): start loading the map and listings map 1.2 s after the page finishes, so they are ready when a visitor scrolls down. */
+(function(){if(!/^\/content\//i.test(location.pathname))return;var done=[];function warm(){var l=document.querySelectorAll('iframe[loading="lazy"]');for(var i=0;i<l.length;i++){var f=l[i],s=f.getAttribute('src')||'';if(f.getAttribute('data-snwarm')||!/idx2\/property-search|google\.com\/maps|maps\.google/i.test(s))continue;f.setAttribute('data-snwarm','1');f.setAttribute('loading','eager');}}if(document.readyState==='complete'){setTimeout(warm,1200);}else{window.addEventListener('load',function(){setTimeout(warm,1200);});}})();
