@@ -297,3 +297,7 @@ html.sn-ld .property-details h2{font-size:24px!important;}
 
 /* Home page phone menu panel was the old blue (fixed 11/7/26) */
 @media (max-width:991px){.da-header-wrap .da-bottom{background:#FFFFFF!important;border-top:1px solid #EEEEEE}.da-header-wrap .da-bottom nav a{color:#1F1F1F!important;text-decoration:none!important}}
+
+/* Solid buttons hover (11/7/26) */
+.sn-solid:hover{background:#000000!important;color:#FFFFFF!important}
+.sn-solid-light:hover{background:#E6E6E6!important;color:#1F1F1F!important}
