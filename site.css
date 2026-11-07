@@ -294,3 +294,6 @@ html.sn-ld .property-details h2{font-size:24px!important;}
 
 /* Phone menu: Neighborhoods sub-items were white text on white (fixed 11/7/26) */
 @media (max-width:991px){.menu-top .submenu,.menu-top .submenu li,.menu-top .submenu li a{background:transparent!important;color:var(--sn-dark,#1F1F1F)!important}.menu-top .submenu li a{padding-left:90px!important;font-size:13px!important;font-weight:400!important}}
+
+/* Home page phone menu panel was the old blue (fixed 11/7/26) */
+@media (max-width:991px){.da-header-wrap .da-bottom{background:#FFFFFF!important;border-top:1px solid #EEEEEE}.da-header-wrap .da-bottom nav a{color:#1F1F1F!important;text-decoration:none!important}}
