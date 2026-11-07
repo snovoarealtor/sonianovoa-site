@@ -291,3 +291,6 @@ html.sn-ld .property-details h2{font-size:24px!important;}
 .map-item-details-carousel-wrapper .lSPager.lSGallery li{height:72px!important;overflow:hidden;border-radius:4px;}
 .map-item-details-carousel-wrapper .lSPager.lSGallery li img{width:100%!important;height:72px!important;object-fit:cover;}
 @media (max-width:767px){.map-item-details-carousel-wrapper .lSPager.lSGallery li,.map-item-details-carousel-wrapper .lSPager.lSGallery li img{height:52px!important;}}
+
+/* Phone menu: Neighborhoods sub-items were white text on white (fixed 11/7/26) */
+@media (max-width:991px){.menu-top .submenu,.menu-top .submenu li,.menu-top .submenu li a{background:transparent!important;color:var(--sn-dark,#1F1F1F)!important}.menu-top .submenu li a{padding-left:90px!important;font-size:13px!important;font-weight:400!important}}
