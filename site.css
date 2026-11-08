@@ -307,3 +307,4 @@ h1,h2,h3,h4,h5,h6,.ada-h4,li.no-submenu,li.has-submenu{color:#4A4A4A}
 
 /* Links inside page text: underline and semi-bold so they look clickable (11/7/26) */
 .content-left p a:not([class]):not([style*="background"]),.content-left li a:not([class]):not([style*="background"]){text-decoration:underline!important;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:600!important;display:inline!important}
+.content p a:not([class]):not([style]),.content li a:not([class]):not([style]){text-decoration:underline!important;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:600!important}
