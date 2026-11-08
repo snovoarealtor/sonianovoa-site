@@ -308,3 +308,11 @@ h1,h2,h3,h4,h5,h6,.ada-h4,li.no-submenu,li.has-submenu{color:#4A4A4A}
 /* Links inside page text: underline and semi-bold so they look clickable (11/7/26) */
 .content-left p a:not([class]):not([style*="background"]),.content-left li a:not([class]):not([style*="background"]){text-decoration:underline!important;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:600!important;display:inline!important}
 .content p a:not([class]):not([style]),.content li a:not([class]):not([style]){text-decoration:underline!important;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:600!important}
+
+/* Clickable community cards: whole card links to the community page, Explore link looks like a button (11/7/26) */
+.content div:has(> h3 > a[href*="/content/"]){position:relative;cursor:pointer;transition:box-shadow .15s,transform .15s}
+.content div:has(> h3 > a[href*="/content/"]):hover{box-shadow:0 6px 18px rgba(0,0,0,.12);transform:translateY(-2px)}
+.content div:has(> h3 > a[href*="/content/"]) h3 a::after{content:"";position:absolute;inset:0}
+.content div:has(> h3 > a[href*="/content/"]) p:last-child a{display:inline-block!important;padding:8px 14px;border:1px solid #4A4A4A;text-decoration:none!important;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600!important}
+.content div:has(> h3 > a[href*="/content/"]) p:last-child a::after{content:" \2192"}
+.content div:has(> h3 > a[href*="/content/"]):hover p:last-child a{background:#4A4A4A;color:#FFFFFF!important}
