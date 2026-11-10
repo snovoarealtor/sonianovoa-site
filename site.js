@@ -88,3 +88,12 @@ document.addEventListener('click',start,true);document.addEventListener('focusin
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';if(/propertyupdates\.info\/104439/.test(h)){ga('amendment3_estimate_request_click',{cta_location:a.closest('#a3Out')?'result':'page'});}else if(/^tel:/i.test(h)){ga('phone_click',{page:'amendment-3'});}else if(/^sms:/i.test(h)){ga('text_click',{page:'amendment-3'});}else if(/^mailto:/i.test(h)){ga('email_click',{page:'amendment-3'});}},true);
 function go(){relabel();note();sticky();var o=document.getElementById('a3Out');if(o&&!o.getAttribute('data-snobs')){o.setAttribute('data-snobs','1');new MutationObserver(outFix).observe(o,{childList:true,subtree:true});}}
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',go);}else{go();}setTimeout(go,1500);})();
+
+
+/* Lead tracking (11/10/26, Sonia approved): sends a GA4 "generate_lead" event to Sonianovoa.com - GA4 when the contact, home valuation or listing alerts form is submitted successfully. */
+(function(){function hook(){var $=window.jQuery;if(!$||!$.fn||hook.done)return !!hook.done;hook.done=1;
+$(document).ajaxSuccess(function(e,xhr,s){try{var u=(s&&s.url)||'';var m=/contactPageEmail|homeValueRequest|listingAlertsRegistration/i.exec(u);if(!m)return;
+var t=String((xhr&&xhr.responseText)||'');if(/not valid|invalid|required|error|failed/i.test(t))return;
+var type={contactpageemail:'contact_form',homevaluerequest:'home_valuation',listingalertsregistration:'listing_alerts'}[m[0].toLowerCase()];
+if(window.gtag)gtag('event','generate_lead',{lead_type:type,page_path:location.pathname,send_to:'G-VF4G6WMRJ6'});}catch(x){}});return true;}
+if(!hook()){var n=0,i=setInterval(function(){if(hook()||++n>40)clearInterval(i);},250);}})();
