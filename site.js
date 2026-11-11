@@ -106,3 +106,5 @@ if(!f('/content/davie')){var c=f('/content/cooper-city');var n=mk(wl,'/content/d
 if(!f('/content/plantation')){var p=f('/content/pembroke-pines');var n2=mk(wl,'/content/plantation','Plantation');p?ul.insertBefore(n2,p.nextSibling):ul.insertBefore(n2,wl);}
 if(!f('/content/southwest-ranches')){ul.insertBefore(mk(wl,'/content/southwest-ranches','Southwest Ranches'),wl);}}}
 try{run();}catch(e){}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){try{run();}catch(e){}});setTimeout(function(){try{run();}catch(e){}},1500);})();
+/* Mobile menu: Agent 3000 caps .menu-top at 426px, hiding the last Neighborhoods links. Let it use the screen height and scroll if needed (11/11/26). */
+(function(){try{var s=document.createElement('style');s.id='sn-mobile-menu-fix';s.textContent='@media (max-width:1025px){.menu-top{max-height:calc(100vh - 120px) !important;overflow-y:auto !important;-webkit-overflow-scrolling:touch;}}';(document.head||document.documentElement).appendChild(s);}catch(e){}})();
