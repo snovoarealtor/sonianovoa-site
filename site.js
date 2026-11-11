@@ -90,10 +90,11 @@ function go(){relabel();note();sticky();var o=document.getElementById('a3Out');i
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',go);}else{go();}setTimeout(go,1500);})();
 
 
-/* Lead tracking (11/10/26, Sonia approved): sends a GA4 "generate_lead" event to Sonianovoa.com - GA4 when the contact, home valuation or listing alerts form is submitted successfully. */
-(function(){function hook(){var $=window.jQuery;if(!$||!$.fn||hook.done)return !!hook.done;hook.done=1;
-$(document).ajaxSuccess(function(e,xhr,s){try{var u=(s&&s.url)||'';var m=/contactPageEmail|homeValueRequest|listingAlertsRegistration/i.exec(u);if(!m)return;
-var t=String((xhr&&xhr.responseText)||'');if(/not valid|invalid|required|error|failed/i.test(t))return;
-var type={contactpageemail:'contact_form',homevaluerequest:'home_valuation',listingalertsregistration:'listing_alerts'}[m[0].toLowerCase()];
-if(window.gtag)gtag('event','generate_lead',{lead_type:type,page_path:location.pathname,send_to:'G-VF4G6WMRJ6'});}catch(x){}});return true;}
-if(!hook()){var n=0,i=setInterval(function(){if(hook()||++n>40)clearInterval(i);},250);}})();
+/* Lead tracking (11/10/26, fixed 11/11/26): watches the site's own form requests directly (the jQuery hook missed them) and sends GA4 "generate_lead" when the contact, home valuation or listing alerts form is submitted successfully. */
+(function(){if(window.__snLead)return;window.__snLead=1;var map={contactpageemail:'contact_form',homevaluerequest:'home_valuation',listingalertsregistration:'listing_alerts'};
+function lead(u,t){try{var m=/contactPageEmail|homeValueRequest|listingAlertsRegistration/i.exec(String(u||''));if(!m)return;if(/not valid|invalid|required|error|failed/i.test(String(t||'')))return;if(window.gtag)gtag('event','generate_lead',{lead_type:map[m[0].toLowerCase()],page_path:location.pathname,send_to:'G-VF4G6WMRJ6'});}catch(x){}}
+var X=window.XMLHttpRequest&&XMLHttpRequest.prototype;if(X){var o=X.open;X.open=function(m,u){var x=this;try{if(/contactPageEmail|homeValueRequest|listingAlertsRegistration/i.test(String(u))){x.addEventListener('load',function(){if(x.status>=200&&x.status<300)lead(u,x.responseText);});}}catch(e){}return o.apply(this,arguments);};}
+if(window.fetch){var f=window.fetch;window.fetch=function(r){var u=(r&&r.url)||r;var p=f.apply(this,arguments);try{if(/contactPageEmail|homeValueRequest|listingAlertsRegistration/i.test(String(u))){p.then(function(res){if(res&&res.ok)res.clone().text().then(function(t){lead(u,t);});}).catch(function(){});}}catch(e){}return p;};}})();
+
+/* Call, text and email taps (11/11/26, Sonia approved): GA4 events on every page except Amendment 3, which tracks its own. */
+(function(){if(/^\/content\/amendment-3/i.test(location.pathname))return;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'',n=/^tel:/i.test(h)?'phone_click':/^sms:/i.test(h)?'text_click':/^mailto:/i.test(h)?'email_click':'';if(n&&window.gtag)gtag('event',n,{page_path:location.pathname,send_to:'G-VF4G6WMRJ6'});},true);})();
