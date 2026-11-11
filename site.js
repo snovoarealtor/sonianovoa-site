@@ -98,3 +98,11 @@ if(window.fetch){var f=window.fetch;window.fetch=function(r){var u=(r&&r.url)||r
 
 /* Call, text and email taps (11/11/26, Sonia approved): GA4 events on every page except Amendment 3, which tracks its own. */
 (function(){if(/^\/content\/amendment-3/i.test(location.pathname))return;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'',n=/^tel:/i.test(h)?'phone_click':/^sms:/i.test(h)?'text_click':/^mailto:/i.test(h)?'email_click':'';if(n&&window.gtag)gtag('event',n,{page_path:location.pathname,send_to:'G-VF4G6WMRJ6'});},true);})();
+
+/* Neighborhoods menu: Davie, Plantation, Southwest Ranches (11/11/26, Sonia approved). The pages exist in Agent 3000 but were not in the menu, so Google and visitors could not find them. Remove this once they are added in Agent 3000. */
+(function(){function mk(ref,href,txt){var a0=ref.querySelector(':scope > a');var li=document.createElement('li');li.className=ref.className;var a=document.createElement('a');a.href=href;a.textContent=txt;if(a0&&a0.className)a.className=a0.className;li.appendChild(a);return li;}
+function run(){var ws=document.querySelectorAll('ul.submenu > li > a[href$="/content/weston"]');for(var i=0;i<ws.length;i++){var wl=ws[i].parentElement,ul=wl.parentElement;if(ul.getAttribute('data-sncity'))continue;ul.setAttribute('data-sncity','1');var f=function(p){var x=ul.querySelector(':scope > li > a[href$="'+p+'"]');return x?x.parentElement:null};
+if(!f('/content/davie')){var c=f('/content/cooper-city');var n=mk(wl,'/content/davie','Davie');c?ul.insertBefore(n,c.nextSibling):ul.insertBefore(n,wl);}
+if(!f('/content/plantation')){var p=f('/content/pembroke-pines');var n2=mk(wl,'/content/plantation','Plantation');p?ul.insertBefore(n2,p.nextSibling):ul.insertBefore(n2,wl);}
+if(!f('/content/southwest-ranches')){ul.insertBefore(mk(wl,'/content/southwest-ranches','Southwest Ranches'),wl);}}}
+try{run();}catch(e){}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){try{run();}catch(e){}});setTimeout(function(){try{run();}catch(e){}},1500);})();
