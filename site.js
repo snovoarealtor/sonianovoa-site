@@ -27,6 +27,7 @@ function run(){
  if(document.getElementById("sn-ld"))return true;
  var box=document.querySelector(".content-box");if(!box||!document.querySelector("h2"))return false;
  var h1=document.querySelector("h1");if(h1&&/\|/.test(txt(h1)))h1.textContent=c.h;
+ [].forEach.call(document.querySelectorAll(".content-box h2"),function(x){if(!x.id)x.id=txt(x).toLowerCase().replace(/['\u2019]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");});
  var place={"@type":"Place","@id":url+"#place","name":c.n+", Cooper City, FL","address":{"@type":"PostalAddress","addressLocality":"Cooper City","addressRegion":"FL","addressCountry":"US"},"containedInPlace":{"@type":"City","name":"Cooper City, Florida","url":city}};
  if(c.lat)place.geo={"@type":"GeoCoordinates","latitude":c.lat,"longitude":c.lng};
  var g=[
