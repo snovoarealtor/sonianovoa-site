@@ -9,6 +9,44 @@ e;var g=document.createElement("span");g.className="sn-ct";g.textContent=f;c.tex
 a!==b;){if(a.tagName==="A"||a.tagName==="BUTTON"||/addToFavoriteList|requestPropInfoBtn/.test(a.className||""))return;a=a.parentNode}(a=b.querySelector(".property-title-click"))&&a.click()})}}function h(){var b=/currentTab=PropertyGrid/i.test(location.search)||!!document.querySelector(".create-grid.box-scheme");b?document.documentElement.classList.add("sn-grid"):document.documentElement.classList.remove("sn-grid");b=document.querySelectorAll(".list-data .property-list");for(var c=0;c<b.length;c++)k(b[c])}
 h();(new MutationObserver(h)).observe(document.documentElement,{childList:!0,subtree:!0})})();
 }catch(e){if(window.console)console.warn("sn part 1",e);}
+/* Site-wide page SEO (11/12/26, Sonia approved): for every /content page not handled by "Community page SEO" (city pages, Savanna, Pembroke Falls, buyer and seller guides): heading without the "| Sonia Novoa" brand, heading ids for jump links, and structured data (page, breadcrumb, place, Sonia as the agent, FAQ). */
+(function(){
+var SKIP=/^(country-glen|rock-creek|monterra|embassy-lakes|cooper-colony-estates)$/;
+var K={
+ "cooper-city":{n:"Cooper City",t:"City",lat:26.0573,lng:-80.2717},
+ "davie":{n:"Davie",t:"City",lat:26.0629,lng:-80.2331},
+ "pembroke-pines":{n:"Pembroke Pines",t:"City",lat:26.0078,lng:-80.2963},
+ "plantation":{n:"Plantation",t:"City",lat:26.1276,lng:-80.2331},
+ "southwest-ranches":{n:"Southwest Ranches",t:"City",lat:26.0587,lng:-80.3373},
+ "weston":{n:"Weston",t:"City",lat:26.1004,lng:-80.3998},
+ "savanna":{n:"Savanna",h:"Savanna Homes in Weston, FL",p:"weston",lat:26.1172,lng:-80.4149},
+ "pembroke-falls":{n:"Pembroke Falls",h:"Pembroke Falls Homes in Pembroke Pines, FL",p:"pembroke-pines"}
+};
+var m=location.pathname.match(/^\/content\/([A-Za-z0-9-]+)\/?$/);if(!m)return;var k=m[1].toLowerCase();if(SKIP.test(k))return;
+var c=K[k],url="https://sonianovoa.com/content/"+k,ag="https://sonianovoa.com/#sonia";
+function txt(e){return (e.innerText||e.textContent||"").replace(/\s+/g," ").trim();}
+function faq(){var out=[],hs=document.querySelectorAll("h2"),f=null;for(var i=0;i<hs.length;i++){if(/FAQ|Questions/i.test(txt(hs[i]))){f=hs[i];break;}}if(!f)return out;
+ var e=f.nextElementSibling,q=null;while(e&&e.tagName!=="H2"){if(e.tagName==="H3"){q=txt(e);}else if(q&&e.tagName==="P"&&txt(e)){out.push({"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":txt(e)}});q=null;}e=e.nextElementSibling;}return out;}
+function run(){
+ if(document.getElementById("sn-ld2"))return true;
+ var h1=document.querySelector("h1");if(!document.querySelector(".content-box")||!h1||!txt(h1))return false;
+ if(c&&c.h)h1.textContent=c.h;else if(/ \| /.test(txt(h1)))h1.textContent=txt(h1).split(" | ")[0];
+ [].forEach.call(document.querySelectorAll(".content-box h2"),function(x){if(!x.id)x.id=txt(x).toLowerCase().replace(/['\u2019]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");});
+ var name=txt(h1),crumbs=[{"@type":"ListItem","position":1,"name":"Home","item":"https://sonianovoa.com/"}];
+ if(c&&c.p)crumbs.push({"@type":"ListItem","position":2,"name":K[c.p].n,"item":"https://sonianovoa.com/content/"+c.p});
+ crumbs.push({"@type":"ListItem","position":crumbs.length+1,"name":c?c.n:name,"item":url});
+ var g=[{"@type":"WebPage","@id":url+"#page","url":url,"name":document.title,"inLanguage":"en-US","author":{"@id":ag},"breadcrumb":{"@id":url+"#crumbs"}},
+  {"@type":"BreadcrumbList","@id":url+"#crumbs","itemListElement":crumbs},
+  {"@type":"RealEstateAgent","@id":ag,"name":"Sonia Novoa, Broker Associate, United Realty Group","url":"https://sonianovoa.com/","telephone":"+1-954-737-4106","knowsLanguage":["en","es"],"address":{"@type":"PostalAddress","streetAddress":"12399 SW 53rd St, Suite 101","addressLocality":"Cooper City","addressRegion":"FL","postalCode":"33330","addressCountry":"US"},"areaServed":["Broward County, FL","Miami-Dade County, FL","Palm Beach County, FL"],"parentOrganization":{"@type":"RealEstateAgent","name":"United Realty Group"}}];
+ if(c){var pl={"@type":c.t||"Place","@id":url+"#place","name":c.n+(c.p?", "+K[c.p].n:"")+", FL","address":{"@type":"PostalAddress","addressLocality":c.p?K[c.p].n:c.n,"addressRegion":"FL","addressCountry":"US"}};
+  if(c.lat)pl.geo={"@type":"GeoCoordinates","latitude":c.lat,"longitude":c.lng};
+  if(c.p)pl.containedInPlace={"@type":"City","name":K[c.p].n+", Florida","url":"https://sonianovoa.com/content/"+c.p};
+  g.push(pl);g[0].about={"@id":url+"#place"};}
+ var q=faq();if(q.length)g.push({"@type":"FAQPage","@id":url+"#faq","mainEntity":q});
+ var s=document.createElement("script");s.type="application/ld+json";s.id="sn-ld2";s.textContent=JSON.stringify({"@context":"https://schema.org","@graph":g});document.head.appendChild(s);return true;
+}
+if(!run()){var n=0,t=setInterval(function(){if(run()||++n>40)clearInterval(t);},250);}
+})();
 /* Community page SEO (11/12/26, Sonia approved "high SEO on all pages"): cleaner H1 without the "| Sonia Novoa" brand, plus structured data Google and AI search engines read (breadcrumb, the neighborhood as a place, Sonia as the local agent, and the page's FAQ). Add a new community by adding one line to C. */
 (function(){
 var C={
