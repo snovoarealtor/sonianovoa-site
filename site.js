@@ -9,6 +9,21 @@ e;var g=document.createElement("span");g.className="sn-ct";g.textContent=f;c.tex
 a!==b;){if(a.tagName==="A"||a.tagName==="BUTTON"||/addToFavoriteList|requestPropInfoBtn/.test(a.className||""))return;a=a.parentNode}(a=b.querySelector(".property-title-click"))&&a.click()})}}function h(){var b=/currentTab=PropertyGrid/i.test(location.search)||!!document.querySelector(".create-grid.box-scheme");b?document.documentElement.classList.add("sn-grid"):document.documentElement.classList.remove("sn-grid");b=document.querySelectorAll(".list-data .property-list");for(var c=0;c<b.length;c++)k(b[c])}
 h();(new MutationObserver(h)).observe(document.documentElement,{childList:!0,subtree:!0})})();
 }catch(e){if(window.console)console.warn("sn part 1",e);}
+/* Blog hub (11/12/26, Sonia approved): the /blog page has no posts right now, so give it a heading and links to the guides already on the site until new posts are published. Hides itself automatically once real posts appear. */
+(function(){
+if(!/^\/blog\/?$/i.test(location.pathname))return;
+var L=[["Florida Amendment 3: 2027 Homestead Exemption Explained","/content/amendment-3"],["Cooper City FL Homes for Sale and Real Estate","/content/cooper-city"],["Monterra, Cooper City","/content/monterra"],["Rock Creek, Cooper City","/content/rock-creek"],["Country Glen, Cooper City","/content/country-glen"],["Embassy Lakes, Cooper City","/content/embassy-lakes"],["Cooper Colony Estates, Cooper City","/content/cooper-colony-estates"],["Davie FL Homes for Sale","/content/davie"],["Pembroke Pines FL Homes for Sale","/content/pembroke-pines"],["Plantation FL Homes for Sale","/content/plantation"],["Weston FL Homes for Sale","/content/weston"],["Southwest Ranches FL Homes for Sale","/content/southwest-ranches"],["Selling Your Home","/content/selling-your-home"],["Why Use a Realtor","/content/why-use-a-realtorreg"]];
+function run(){
+ if(document.getElementById("sn-bloghub"))return true;
+ var c=document.querySelector(".content-box .content-left");if(!c)return false;
+ if(c.querySelector("a[href*='/blog/']"))return true;
+ var d=document.createElement("div");d.id="sn-bloghub";
+ var h="<h1>South Florida Real Estate Blog</h1><p>Guides to buying, selling and owning a home in Broward, Miami-Dade and Palm Beach, from Sonia Novoa, Broker Associate with United Realty Group. New articles are on the way. In the meantime, here are the most popular guides on the site.</p><ul>";
+ for(var i=0;i<L.length;i++)h+="<li><a href=\""+L[i][1]+"\">"+L[i][0]+"</a></li>";
+ d.innerHTML=h+"</ul>";c.insertBefore(d,c.firstChild);return true;
+}
+if(!run()){var n=0,t=setInterval(function(){if(run()||++n>40)clearInterval(t);},250);}
+})();
 /* Site-wide page SEO (11/12/26, Sonia approved): for every /content page not handled by "Community page SEO" (city pages, Savanna, Pembroke Falls, buyer and seller guides): heading without the "| Sonia Novoa" brand, heading ids for jump links, and structured data (page, breadcrumb, place, Sonia as the agent, FAQ). */
 (function(){
 var SKIP=/^(country-glen|rock-creek|monterra|embassy-lakes|cooper-colony-estates)$/;
