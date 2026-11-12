@@ -9,6 +9,41 @@ e;var g=document.createElement("span");g.className="sn-ct";g.textContent=f;c.tex
 a!==b;){if(a.tagName==="A"||a.tagName==="BUTTON"||/addToFavoriteList|requestPropInfoBtn/.test(a.className||""))return;a=a.parentNode}(a=b.querySelector(".property-title-click"))&&a.click()})}}function h(){var b=/currentTab=PropertyGrid/i.test(location.search)||!!document.querySelector(".create-grid.box-scheme");b?document.documentElement.classList.add("sn-grid"):document.documentElement.classList.remove("sn-grid");b=document.querySelectorAll(".list-data .property-list");for(var c=0;c<b.length;c++)k(b[c])}
 h();(new MutationObserver(h)).observe(document.documentElement,{childList:!0,subtree:!0})})();
 }catch(e){if(window.console)console.warn("sn part 1",e);}
+/* Community page SEO (11/12/26, Sonia approved "high SEO on all pages"): cleaner H1 without the "| Sonia Novoa" brand, plus structured data Google and AI search engines read (breadcrumb, the neighborhood as a place, Sonia as the local agent, and the page's FAQ). Add a new community by adding one line to C. */
+(function(){
+var C={
+ "country-glen":{n:"Country Glen",h:"Country Glen Homes in Cooper City, FL",lat:26.0548,lng:-80.3225,d:"2026-11-11"},
+ "rock-creek":{n:"Rock Creek",h:"Rock Creek Homes in Cooper City, FL",lat:26.0369,lng:-80.3048,d:"2026-11-11"},
+ "monterra":{n:"Monterra",h:"Monterra Homes in Cooper City, FL",lat:26.0381,lng:-80.2567,d:"2026-11-08"},
+ "embassy-lakes":{n:"Embassy Lakes",h:"Embassy Lakes Homes in Cooper City, FL",lat:26.0371,lng:-80.2887,d:"2026-11-12"},
+ "cooper-colony-estates":{n:"Cooper Colony Estates",h:"Cooper Colony Estates Homes in Cooper City, FL",lat:26.0579,lng:-80.2701,d:"2026-11-12"}
+};
+var m=location.pathname.match(/^\/content\/([a-z0-9-]+)\/?$/i);if(!m)return;var k=m[1].toLowerCase(),c=C[k];if(!c)return;
+var url="https://sonianovoa.com/content/"+k,city="https://sonianovoa.com/content/cooper-city";
+function txt(e){return (e.innerText||e.textContent||"").replace(/\s+/g," ").trim();}
+function faq(){var out=[],hs=document.querySelectorAll("h2"),f=null;for(var i=0;i<hs.length;i++){if(/FAQ/i.test(txt(hs[i]))){f=hs[i];break;}}if(!f)return out;
+ var e=f.nextElementSibling,q=null;while(e&&e.tagName!=="H2"){if(e.tagName==="H3"){q=txt(e);}else if(q&&e.tagName==="P"&&txt(e)){out.push({"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":txt(e)}});q=null;}e=e.nextElementSibling;}return out;}
+function run(){
+ if(document.getElementById("sn-ld"))return true;
+ var box=document.querySelector(".content-box");if(!box||!document.querySelector("h2"))return false;
+ var h1=document.querySelector("h1");if(h1&&/\|/.test(txt(h1)))h1.textContent=c.h;
+ var place={"@type":"Place","@id":url+"#place","name":c.n+", Cooper City, FL","address":{"@type":"PostalAddress","addressLocality":"Cooper City","addressRegion":"FL","addressCountry":"US"},"containedInPlace":{"@type":"City","name":"Cooper City, Florida","url":city}};
+ if(c.lat)place.geo={"@type":"GeoCoordinates","latitude":c.lat,"longitude":c.lng};
+ var g=[
+  {"@type":"WebPage","@id":url+"#page","url":url,"name":document.title,"dateModified":c.d,"inLanguage":"en-US","about":{"@id":url+"#place"},"author":{"@id":"https://sonianovoa.com/#sonia"},"breadcrumb":{"@id":url+"#crumbs"}},
+  {"@type":"BreadcrumbList","@id":url+"#crumbs","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://sonianovoa.com/"},
+   {"@type":"ListItem","position":2,"name":"Cooper City","item":city},
+   {"@type":"ListItem","position":3,"name":c.n,"item":url}]},
+  place,
+  {"@type":"RealEstateAgent","@id":"https://sonianovoa.com/#sonia","name":"Sonia Novoa, Broker Associate, United Realty Group","url":"https://sonianovoa.com/","telephone":"+1-954-737-4106","knowsLanguage":["en","es"],"address":{"@type":"PostalAddress","streetAddress":"12399 SW 53rd St, Suite 101","addressLocality":"Cooper City","addressRegion":"FL","postalCode":"33330","addressCountry":"US"},"areaServed":[{"@id":url+"#place"},{"@type":"City","name":"Cooper City, Florida"}],"parentOrganization":{"@type":"RealEstateAgent","name":"United Realty Group"}}
+ ];
+ var q=faq();if(q.length)g.push({"@type":"FAQPage","@id":url+"#faq","mainEntity":q});
+ var s=document.createElement("script");s.type="application/ld+json";s.id="sn-ld";s.textContent=JSON.stringify({"@context":"https://schema.org","@graph":g});document.head.appendChild(s);return true;
+}
+if(!run()){var n=0,t=setInterval(function(){if(run()||++n>40)clearInterval(t);},250);}
+})();
+
 
 /* ---- part 2 ---- */
 try{
