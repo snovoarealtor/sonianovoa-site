@@ -16,7 +16,7 @@ h();(new MutationObserver(h)).observe(document.documentElement,{childList:!0,sub
 /* Blog hub (11/12/26, Sonia approved): the /blog page has no posts right now, so give it a heading and links to the guides already on the site until new posts are published. Hides itself automatically once real posts appear. */
 (function(){
 if(!/^\/blog\/?$/i.test(location.pathname))return;
-var L=[["Florida Amendment 3: 2027 Homestead Exemption Explained","/content/amendment-3"],["Cooper City FL Homes for Sale and Real Estate","/content/cooper-city"],["Monterra, Cooper City","/content/monterra"],["Rock Creek, Cooper City","/content/rock-creek"],["Country Glen, Cooper City","/content/country-glen"],["Embassy Lakes, Cooper City","/content/embassy-lakes"],["Cooper Colony Estates, Cooper City","/content/cooper-colony-estates"],["Davie FL Homes for Sale","/content/davie"],["Pembroke Pines FL Homes for Sale","/content/pembroke-pines"],["Plantation FL Homes for Sale","/content/plantation"],["Weston FL Homes for Sale","/content/weston"],["Southwest Ranches FL Homes for Sale","/content/southwest-ranches"],["Selling Your Home","/content/selling-your-home"],["Why Use a Realtor","/content/why-use-a-realtorreg"]];
+var L=[["Florida Amendment 3: 2027 Homestead Exemption Explained","/content/amendment-3"],["Cooper City FL Homes for Sale and Real Estate","/content/cooper-city"],["Monterra, Cooper City","/content/monterra"],["Rock Creek, Cooper City","/content/rock-creek"],["Country Glen, Cooper City","/content/country-glen"],["Embassy Lakes, Cooper City","/content/embassy-lakes"],["Cooper Colony Estates, Cooper City","/content/cooper-colony-estates"],["Timberlake, Cooper City","/content/timberlake"],["Davie FL Homes for Sale","/content/davie"],["Pembroke Pines FL Homes for Sale","/content/pembroke-pines"],["Plantation FL Homes for Sale","/content/plantation"],["Weston FL Homes for Sale","/content/weston"],["Southwest Ranches FL Homes for Sale","/content/southwest-ranches"],["Selling Your Home","/content/selling-your-home"],["Why Use a Realtor","/content/why-use-a-realtorreg"]];
 function run(){
  if(document.getElementById("sn-bloghub"))return true;
  var c=document.querySelector(".content-box .content-left");if(!c)return false;
@@ -30,7 +30,7 @@ if(!run()){var n=0,t=setInterval(function(){if(run()||++n>40)clearInterval(t);},
 })();
 /* Site-wide page SEO (11/12/26, Sonia approved): for every /content page not handled by "Community page SEO" (city pages, Savanna, Pembroke Falls, buyer and seller guides): heading without the "| Sonia Novoa" brand, heading ids for jump links, and structured data (page, breadcrumb, place, Sonia as the agent, FAQ). */
 (function(){
-var SKIP=/^(country-glen|rock-creek|monterra|embassy-lakes|cooper-colony-estates)$/;
+var SKIP=/^(country-glen|rock-creek|monterra|embassy-lakes|cooper-colony-estates|timberlake)$/;
 var K={
  "cooper-city":{n:"Cooper City",t:"City",lat:26.0573,lng:-80.2717},
  "davie":{n:"Davie",t:"City",lat:26.0629,lng:-80.2331},
@@ -73,7 +73,7 @@ var C={
  "rock-creek":{n:"Rock Creek",h:"Rock Creek Homes in Cooper City, FL",lat:26.0369,lng:-80.3048,d:"2026-11-11"},
  "monterra":{n:"Monterra",h:"Monterra Homes in Cooper City, FL",lat:26.0381,lng:-80.2567,d:"2026-11-08"},
  "embassy-lakes":{n:"Embassy Lakes",h:"Embassy Lakes Homes in Cooper City, FL",lat:26.0371,lng:-80.2887,d:"2026-11-12"},
- "cooper-colony-estates":{n:"Cooper Colony Estates",h:"Cooper Colony Estates Homes in Cooper City, FL",lat:26.0579,lng:-80.2701,d:"2026-11-12"}
+ "cooper-colony-estates":{n:"Cooper Colony Estates",h:"Cooper Colony Estates Homes in Cooper City, FL",lat:26.0579,lng:-80.2701,d:"2026-11-12"},"timberlake":{n:"Timberlake",h:"Timberlake Homes in Cooper City, FL",lat:26.0585,lng:-80.2625,d:"2026-11-12"}
 };
 var m=location.pathname.match(/^\/content\/([a-z0-9-]+)\/?$/i);if(!m)return;var k=m[1].toLowerCase(),c=C[k];if(!c)return;
 var url="https://sonianovoa.com/content/"+k,city="https://sonianovoa.com/content/cooper-city";
