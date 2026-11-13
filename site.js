@@ -16,7 +16,7 @@ h();(new MutationObserver(h)).observe(document.documentElement,{childList:!0,sub
 /* Blog hub (11/12/26, Sonia approved): the /blog page has no posts right now, so give it a heading and links to the guides already on the site until new posts are published. Hides itself automatically once real posts appear. */
 (function(){
 if(!/^\/blog\/?$/i.test(location.pathname))return;
-var L=[["Florida Amendment 3: 2027 Homestead Exemption Explained","/content/amendment-3"],["Cooper City FL Homes for Sale and Real Estate","/content/cooper-city"],["Monterra, Cooper City","/content/monterra"],["Rock Creek, Cooper City","/content/rock-creek"],["Country Glen, Cooper City","/content/country-glen"],["Embassy Lakes, Cooper City","/content/embassy-lakes"],["Cooper Colony Estates, Cooper City","/content/cooper-colony-estates"],["Timberlake, Cooper City","/content/timberlake"],["Davie FL Homes for Sale","/content/davie"],["Pembroke Pines FL Homes for Sale","/content/pembroke-pines"],["Plantation FL Homes for Sale","/content/plantation"],["Weston FL Homes for Sale","/content/weston"],["Southwest Ranches FL Homes for Sale","/content/southwest-ranches"],["Selling Your Home","/content/selling-your-home"],["Why Use a Realtor","/content/why-use-a-realtorreg"]];
+var L=[["Florida Amendment 3: 2027 Homestead Exemption Explained","/content/amendment-3"],["Cooper City FL Homes for Sale and Real Estate","/content/cooper-city"],["Monterra, Cooper City","/content/monterra"],["Rock Creek, Cooper City","/content/rock-creek"],["Country Glen, Cooper City","/content/country-glen"],["Embassy Lakes, Cooper City","/content/embassy-lakes"],["Cooper Colony Estates, Cooper City","/content/cooper-colony-estates"],["Timberlake, Cooper City","/content/timberlake"],["Davie FL Homes for Sale","/content/davie"],["Pembroke Pines FL Homes for Sale","/content/pembroke-pines"],["Pembroke Falls, Pembroke Pines","/content/pembroke-falls"],["Plantation FL Homes for Sale","/content/plantation"],["Weston FL Homes for Sale","/content/weston"],["Southwest Ranches FL Homes for Sale","/content/southwest-ranches"],["Selling Your Home","/content/selling-your-home"],["Why Use a Realtor","/content/why-use-a-realtorreg"]];
 function run(){
  if(document.getElementById("sn-bloghub"))return true;
  var c=document.querySelector(".content-box .content-left");if(!c)return false;
@@ -39,7 +39,7 @@ var K={
  "southwest-ranches":{n:"Southwest Ranches",t:"City",lat:26.0587,lng:-80.3373},
  "weston":{n:"Weston",t:"City",lat:26.1004,lng:-80.3998},
  "savanna":{n:"Savanna",h:"Savanna Homes in Weston, FL",p:"weston",lat:26.1172,lng:-80.4149},
- "pembroke-falls":{n:"Pembroke Falls",h:"Pembroke Falls Homes in Pembroke Pines, FL",p:"pembroke-pines"}
+ "pembroke-falls":{n:"Pembroke Falls",h:"Pembroke Falls Homes in Pembroke Pines, FL",p:"pembroke-pines",lat:26.0215,lng:-80.3320}
 };
 var m=location.pathname.match(/^\/content\/([A-Za-z0-9-]+)\/?$/);if(!m)return;var k=m[1].toLowerCase();if(SKIP.test(k))return;
 var c=K[k],url="https://sonianovoa.com/content/"+k,ag="https://sonianovoa.com/#sonia";
